@@ -1,0 +1,8 @@
+gradio==2.2.16
+deepgram-sdk==3.*
+python-dotenv==0.19.2
+requests==2.25.1
+groq==0.1.0
+twilio==6.63.0
+Flask==2.0.2
+httpx==0.18.2
