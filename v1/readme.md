@@ -1,6 +1,7 @@
-# Prank Call AI Service
+## This doesnt work yet. Dont waste your time here unless youre reaaally bored. 
+# Voice Call AI Service
 
-This project is a prank call AI service that uses Groqchat and Llama3 for fast AI model inference, Deepgram for fast speech-to-text conversion, and 11labs for text-to-speech conversion. The user interface is built with Gradio, and Twilio is used to make phone calls.
+This project is a voice call AI service that uses Groqchat and Llama3 for fast AI model inference, Deepgram for fast speech-to-text conversion, and 11labs for text-to-speech conversion. The user interface is built with Gradio, and Twilio is used to make phone calls.
 
 ## Features
 
@@ -83,4 +84,4 @@ Feel free to submit issues, fork the repository and send pull requests. For majo
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details. 
