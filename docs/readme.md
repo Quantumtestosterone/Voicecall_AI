@@ -1,23 +1,38 @@
-# Prank Call AI Service
+#  Call AI Service (Alpha Prototype)
 
-This project implements a prank call AI service using various APIs and technologies.
+**IMPORTANT NOTICE: This project is currently an alpha prototype and does not function as intended. It is a conceptual demonstration and should not be used for any real-world applications.**
+
+## Project Overview
+
+This project aims to implement a  call AI service using various APIs and technologies. It is designed to showcase the potential integration of multiple AI services for generating and conducting automated prank calls. However, please note that this is a work in progress and is not yet operational.
+
+## Features (Planned)
+
+- Initiate phone calls using Twilio
+- Transcribe audio using Deepgram
+- Generate AI responses using Groq or Anthropic's Claude 3.5 Sonnet
+- Convert text to speech using ElevenLabs
 
 ## Setup
 
-1. Install dependencies:
+1. Clone this repository:
+git clone https://github.com/yourusername/prank-call-ai-service.git
+cd prank-call-ai-service
+
+2. Create a virtual environment:
+
+python -m venv venv
+source venv/bin/activate  # On Windows, use venv\Scripts\activate
+
+3. Install dependencies:
 pip install -r requirements.txt
-2. Set up environment variables in a `.env` file:
-GROQ_API_KEY=your_groq_api_key
-ELEVENLABS_API_KEY=your_elevenlabs_api_key
-ELEVENLABS_VOICE_ID=your_elevenlabs_voice_id
-TWILIO_ACCOUNT_SID=your_twilio_account_sid
-TWILIO_AUTH_TOKEN=your_twilio_auth_token
-TWILIO_PHONE_NUMBER=your_twilio_phone_number
-DG_API_KEY=your_deepgram_api_key
-3. Run the main application:
-python main.py
-4. Run the server:
-python server.py
+
+4. Run the main application:
+
+5. Open the Gradio interface in your web browser (typically at http://127.0.0.1:7860).
+
+6. Use the Setup tab in the Gradio interface to input your API keys and other necessary information.
+
 ## Project Structure
 
 - `main.py`: Gradio interface for the prank call service
@@ -25,20 +40,29 @@ python server.py
 - `api/`: Contains modules for interacting with various APIs
 - `config.py`: Centralized configuration management
 - `utils.py`: Utility functions and base classes
-- `tests/`: Unit tests for each module
+- `tests/`: Unit tests for each module (not implemented yet)
 - `docs/`: Project documentation
 
-## Features
+## Disclaimer
 
-- Initiate phone calls using Twilio
-- Transcribe audio using Deepgram
-- Generate AI responses using Groq
-- Convert text to speech using ElevenLabs
+This project is a conceptual prototype and is not intended for actual use. Automated nk calls may be illegal in many jurisdictions and can cause distress to recipients. This project is for educational purposes only and should not be used to make real phone calls or harass individuals.
 
 ## Contributing
 
-Please read CONTRIBUTING.md for details on our code of conduct and the process for submitting pull requests.
+As this is an alpha prototype, we are not currently accepting contributions. However, feel free to fork the repository and experiment with the concept on your own.
 
 ## License
 
 This project is licensed under the MIT License - see the LICENSE.md file for details.
+
+## Future Development
+
+This prototype is a starting point for exploring the integration of various AI technologies. Future development may include:
+
+- Implementing proper error handling and security measures
+- Adding more AI model options
+- Improving the user interface
+- Developing a more robust backend architecture
+- Ensuring compliance with relevant laws and ethical guidelines
+
+Please note that there are no concrete plans to develop this into a functional product at this time.
