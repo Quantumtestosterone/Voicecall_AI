@@ -4,7 +4,7 @@
 
 ## Project Overview
 
-This project aims to implement a  call AI service using various APIs and technologies. It is designed to showcase the potential integration of multiple AI services for generating and conducting automated prank calls. However, please note that this is a work in progress and is not yet operational.
+This project aims to implement a  call AI service using various APIs and technologies. It is designed to showcase the potential integration of multiple AI services for generating and conducting automated calls. However, please note that this is a work in progress and is not yet operational.
 
 ## Features (Planned)
 
@@ -16,8 +16,8 @@ This project aims to implement a  call AI service using various APIs and technol
 ## Setup
 
 1. Clone this repository:
-git clone https://github.com/yourusername/prank-call-ai-service.git
-cd prank-call-ai-service
+git clone (repo link)
+cd repo
 
 2. Create a virtual environment:
 
@@ -35,7 +35,7 @@ pip install -r requirements.txt
 
 ## Project Structure
 
-- `main.py`: Gradio interface for the prank call service
+- `main.py`: Gradio interface for the  call service
 - `server.py`: Flask server for handling Twilio webhooks
 - `api/`: Contains modules for interacting with various APIs
 - `config.py`: Centralized configuration management
