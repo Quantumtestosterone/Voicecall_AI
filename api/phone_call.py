@@ -7,7 +7,13 @@ class TwilioClient(BaseAPIClient):
         super().__init__(Config.TWILIO_AUTH_TOKEN)
         self.account_sid = Config.TWILIO_ACCOUNT_SID
         self.phone_number = Config.TWILIO_PHONE_NUMBER
-        self.client = Client(self.account_sid, self.api_key)
+        self._client = None
+
+    @property
+    def client(self):
+        if self._client is None:
+            self._client = Client(self.account_sid, self.api_key)
+        return self._client
 
     async def initiate_call(self, to_phone_number: str, message_url: str) -> str:
         try:
@@ -20,8 +26,10 @@ class TwilioClient(BaseAPIClient):
         except Exception as e:
             return self.handle_error(e)
 
-twilio_client = TwilioClient()
+# Remove the global instantiation
+# twilio_client = TwilioClient()
 
 async def initiate_call(to_phone_number: str) -> str:
     message_url = "http://your-server-url/message"  # Placeholder URL for Twilio to fetch instructions
-    return await twilio_client.initiate_call(to_phone_number, message_url)
+    client = TwilioClient()
+    return await client.initiate_call(to_phone_number, message_url)

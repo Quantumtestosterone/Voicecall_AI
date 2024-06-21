@@ -1,13 +1,19 @@
-import anthropic
-from groq import Groq
 from typing import List, Dict
+from groq import Groq
+import anthropic
 from config import Config
 from utils import BaseAPIClient, logger
 
 class GroqClient(BaseAPIClient):
     def __init__(self):
         super().__init__(Config.GROQ_API_KEY)
-        self.client = Groq(api_key=self.api_key)
+        self._client = None
+
+    @property
+    def client(self):
+        if self._client is None:
+            self._client = Groq(api_key=self.api_key)
+        return self._client
 
     async def get_response(self, messages: List[Dict[str, str]]) -> str:
         try:
@@ -22,7 +28,13 @@ class GroqClient(BaseAPIClient):
 class AnthropicClient(BaseAPIClient):
     def __init__(self):
         super().__init__(Config.ANTHROPIC_API_KEY)
-        self.client = anthropic.Anthropic(api_key=self.api_key)
+        self._client = None
+
+    @property
+    def client(self):
+        if self._client is None:
+            self._client = anthropic.Anthropic(api_key=self.api_key)
+        return self._client
 
     async def get_response(self, messages: List[Dict[str, str]]) -> str:
         try:
@@ -36,14 +48,11 @@ class AnthropicClient(BaseAPIClient):
         except Exception as e:
             return self.handle_error(e)
 
-groq_client = GroqClient()
-anthropic_client = AnthropicClient()
-
 def set_ai_model(model: str):
     if model == "Groq":
-        return groq_client
+        return GroqClient()
     elif model == "Claude 3.5 Sonnet":
-        return anthropic_client
+        return AnthropicClient()
     else:
         raise ValueError("Invalid AI model selected")
 
