@@ -49,11 +49,11 @@ This project is a conceptual prototype and is not intended for actual use. Autom
 
 ## Contributing
 
-As this is an alpha prototype, we are not currently accepting contributions. However, feel free to fork the repository and experiment with the concept on your own.
+As this is an alpha prototype,  feel free to fork the repository and experiment with the concept on your own. Honestly, any help is appreciated 
 
 ## License
 
-This project is licensed under the MIT License - see the LICENSE.md file for details.
+This project is licensed under the MIT License - see the LICENSE.md file for details. 
 
 ## Future Development
 
@@ -64,5 +64,11 @@ This prototype is a starting point for exploring the integration of various AI t
 - Improving the user interface
 - Developing a more robust backend architecture
 - Ensuring compliance with relevant laws and ethical guidelines
+- making the UI easier to work with
+- reducing code to the bare minimum and optimizing inference
+- adding scripts for the AI to stick with
+- Agentic Framework
+- Implementing Local Models for better cost efficiency (with elevenlabs its 8$ per hour of audio  which is too much)
+- 
 
-Please note that there are no concrete plans to develop this into a functional product at this time.
+Please note that there are no concrete plans to develop this into a functional product at this time that said i'm always open to suggestions.
