@@ -6,3 +6,6 @@ deepgram-sdk
 flask
 python-dotenv
 aiohttp
+soundfile
+librosa
+numpy

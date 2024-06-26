@@ -7,7 +7,7 @@ REM Upgrade pip
 python -m pip install --upgrade pip
 
 REM Upgrade required packages
-pip install --upgrade streamlit anthropic groq python-dotenv aiohttp twilio deepgram-sdk
+pip install requirements.txt
 
 REM Deactivate the virtual environment
 deactivate

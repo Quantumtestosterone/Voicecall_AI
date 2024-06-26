@@ -8,6 +8,7 @@ from api.phone_call import test_twilio_connection, initiate_call
 from api.deepgram_transcription import start_deepgram_transcription
 from api.text_to_speech import convert_text_to_speech
 from api.ai_model import get_ai_response, set_ai_model
+from api.chat_and_tts import chat_and_speak, transcribe_audio
 from config import Config
 from server import app as flask_app
 
@@ -154,10 +155,18 @@ def create_interface() -> gr.Blocks:
 
         with gr.Tab("Transcription"):
             audio_file_input = gr.File(label="Upload Audio File")
+            transcription_model = gr.Dropdown(label="Select Transcription Model", choices=["Deepgram", "Groq Whisper"], value="Deepgram")
             transcribe_button = gr.Button("Start Transcription")
             transcription_output = gr.Textbox(label="Transcription Result")
-            transcribe_button.click(fn=lambda file: asyncio.run(start_deepgram_transcription(file)), 
-                                    inputs=audio_file_input, 
+
+            def transcribe(file, model):
+                if model == "Deepgram":
+                    return asyncio.run(start_deepgram_transcription(file))
+                elif model == "Groq Whisper":
+                    return asyncio.run(transcribe_audio(file))
+
+            transcribe_button.click(fn=transcribe, 
+                                    inputs=[audio_file_input, transcription_model], 
                                     outputs=transcription_output)
 
         with gr.Tab("Text to Speech"):
@@ -177,6 +186,39 @@ def create_interface() -> gr.Blocks:
             ai_button.click(fn=lambda model, prompt, text: asyncio.run(get_ai_response(set_ai_model(model), prompt, text)),
                             inputs=[ai_model_selection, system_prompt, ai_text_input],
                             outputs=ai_output)
+
+        with gr.Tab("Chat and TTS"):
+            chat_history = gr.Chatbot()
+            with gr.Row():
+                user_input = gr.Textbox(label="Your message", scale=4)
+                audio_input = gr.Audio(source="microphone", type="filepath", label="Or record audio", scale=1)
+            system_prompt = gr.Textbox(label="System Prompt", value="You are an AI designed to engage in phone calls.")
+            send_button = gr.Button("Send")
+            audio_output = gr.Audio(label="AI Speech", autoplay=True)
+
+            def user_message(user_input, audio_input, chat_history):
+                if audio_input:
+                    transcription = asyncio.run(transcribe_audio(audio_input))
+                    return "", None, chat_history + [[transcription, None]]
+                else:
+                    return "", None, chat_history + [[user_input, None]]
+
+            def bot_response(chat_history, system_prompt):
+                user_message = chat_history[-1][0]
+                bot_message, audio_file = asyncio.run(chat_and_speak(user_message, system_prompt))
+                chat_history[-1][1] = bot_message
+                return chat_history, audio_file
+
+            send_button.click(
+                user_message,
+                inputs=[user_input, audio_input, chat_history],
+                outputs=[user_input, audio_input, chat_history],
+                queue=False
+            ).then(
+                bot_response,
+                inputs=[chat_history, system_prompt],
+                outputs=[chat_history, audio_output]
+            )
 
         interface.load(fn=load_api_keys, outputs=[
             groq_api_key, elevenlabs_api_key, elevenlabs_voice_id, 
